@@ -158,3 +158,27 @@ void cargarArchivo(Conductor x[]){
     fclose(f);
     cout << "El archivo ha sido cargado exitosamente" <<endl;
 }
+
+int InfraccionesXProvincia (select){
+    FILE *f;
+    int encontrados =0;
+    struct Infraccion in;
+    if (f=fopen("procesados.bin" , "rb"))
+    {
+        while (!feof(f))
+        {
+            fread(&in,sizeof(struct Infraccion),1,f);
+         if (strcmp(select,in.codProvincia) == 0)
+         {
+             encontrado = 1;
+             cout << in.conductorID << endl;
+         }
+        }
+        if (!encontrados)
+            cout << "No hay registros de infracciones en esta provincia";
+        fclose(f)
+         return 1;
+    }
+    return 0;
+}
+
