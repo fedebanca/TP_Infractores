@@ -182,3 +182,17 @@ int InfraccionesXProvincia (select){
     return 0;
 }
 
+int BuscarXId (Conductor cond1[])
+{
+    FILE *conductores;
+    int encontrado = 0;
+    struct Conductor con
+    if (f=fopen("conductores.bin","rb"))
+    {
+        while (!feof(conductores))
+        {
+            fread(&con,sizeof(Conductor),Tam,conductores);
+            if (strcmp(
+             
+     
+     
