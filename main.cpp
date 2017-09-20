@@ -162,37 +162,97 @@ void cargarArchivo(Conductor x[]){
 int InfraccionesXProvincia (select){
     FILE *f;
     int encontrados =0;
+    bool IndiceConductores[TAM];
+    int ind
+    long int ic
     struct Infraccion in;
-    if (f=fopen("procesados.bin" , "rb"))
+    if (f=fopen("procesados.bin" , "rb") == null)
+        cout << "error al abrir el archivo de procesados" << endl;
+    else
     {
         while (!feof(f))
         {
             fread(&in,sizeof(struct Infraccion),1,f);
          if (strcmp(select,in.codProvincia) == 0)
          {
+             ind = ftell(procesados) / sizeof(struct Infraccion)
              encontrado = 1;
-             cout << in.conductorID << endl;
+             IndiceConductores[ind] = true;
          }
-        }
+         fclose(f)
+   /*      if (f = fopen("Conductores.bin" , "rb") == null))
+              cout << "error al abrir el archivo de conductores" << endl;
+         else
+         {
+          for (ind = 0, i<TAM, ind++)
+             if (IndiceConductores[ind] == true)
+             {
+                 ic = int * sizeof(struct conductor)
+                 fseek(&in,ic,seek_set)
+                 if (fread(&conductor,sizeof(conductor),1,f))
+                     cout << "conductor:" f.ConductorID << endl;
+        }   */
         if (!encontrados)
             cout << "No hay registros de infracciones en esta provincia";
+         else 
+         {
+          if (f = fopen("Conductores.bin" , "rb") == null))
+              cout << "error al abrir el archivo de conductores" << endl;
+         else
+         {
+          for (ind = 0, i<TAM, ind++)
+             if (IndiceConductores[ind] == true)
+             {
+                 ic = int * sizeof(struct conductor)
+                 fseek(&in,ic,seek_set)
+                 if (fread(&conductor,sizeof(conductor),1,f))
+                     cout << "conductor:" f.ConductorID << endl;
+        } 
+         }
         fclose(f)
          return 1;
     }
     return 0;
 }
 
-int BuscarXId (Conductor cond1[])
+int CrearLote()
 {
-    FILE *conductores;
-    int encontrado = 0;
-    struct Conductor con
-    if (f=fopen("conductores.bin","rb"))
+    char num[2];
+    char resp[1];
+    cout << "ingrese el numero del lote que quiere crear" << endl;
+    cin >> num;
+    FILE *f;
+    struct Infraccion in;
+    f = fopen("lote.bin","wb");
+    if (!f)
+        cout << "error al crear el lote." << endl;
+    else
     {
-        while (!feof(conductores))
+        do
         {
-            fread(&con,sizeof(Conductor),Tam,conductores);
-            if (strcmp(
-             
-     
+        cout << "desea ingresar una infraccion? S/N"<< endl;
+        cin >> resp;
+        if (resp == "s" || resp == "S")
+        {
+            cout<<"ingrese la id de la infracción"<< endl;
+            cin >> in.infraccionID;
+            cout<<"ingrese la fecha y hora de la infracción (use el formato AAAAMMDDHH:MM)"<<endl;
+            cin >> in.fechahora;
+            cout << "ingrese el monto de la infracción"<<endl;
+            cin >> in.monto;
+            cout << "ingrese el id del conductor"<< endl;
+            cin >> in.conductorID;
+            cout << "ingrese el codigo de la provincia" << endl;
+            cin >> in.codProvicia;
+            fwrite(&in , sizeof(in) ,1 , f);
+            limpiar();
+        }
+        }
+        while (resp != "n" || resp != "N");
+        fclose(f);
+    }
+
+
+    return 0;
+}
      
