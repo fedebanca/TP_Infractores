@@ -255,4 +255,39 @@ int CrearLote()
 
     return 0;
 }
-     
+
+int ProcesarLote()
+{ 
+    /*Puse muchos comentarios porque no se como vas a llamar definitivamente al vector de conductores*/
+    int i = 0;
+    FILE *L;
+    /*numero de lote (NL)*/
+    char NL[20];
+    cout << "Ingrese el nombre del lote que quiere procesar"<< endl;
+    cin >> NL;
+    L = fopen(NL,"rb");
+    struct Infraccion in;
+    if(!L)
+        cout <<"error al abrir el lote" << endl;
+    else{
+        while(!feof(L))
+        {
+            fread(&in,sizeof(struct Infraccion),1,L);
+            /* usar el subprograma de fecha valida para validar la fecha de la instruccion*/
+            while(strcmp(in.conductorID,/*campo de conductor en el vector de conductores*/) != 0 || i < TAM) /*o seroa el puntero para ubicarse en el vector de conductores*/
+                i ++;
+            if (i > TAM)
+                    cout << "El conductor " << in.conductorID << "no esta registrado"  << endl;
+            else
+            {
+                /*aumentar en uno el numero de infracciones del conductor*/
+                fseek(/*archivo de procesados.bin*/, 0, SEEK_END) /*lo puse por si es necesario, si no hace falta borralo*/
+                fwrite(&in, sizeof(struct Infraccion), 1, /*archivo de procesados.bin*/)
+                cout << "la infraccion " << in.infraccionID << "se ha cargado correctamente" << endl;
+            }
+        }
+    }
+    /* aca abria que cerrar y/o eliminar el archivo del lote */
+
+    return 0;
+}
